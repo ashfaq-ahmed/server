@@ -12,6 +12,7 @@ module.exports.list = async function (query) {
     const ramisLocation = {lat: 51.5144636,lon: -0.142571};
 
     const normalizedArray = []; // contains one entry for every partner office. Example, partner with multiple offices with have multiple entries
+    // filter the data by distance
     for (const partner of partners) {
         for (const office of partner.offices) {
             const  [lat, lon] = office.coordinates.split(',');
@@ -36,8 +37,8 @@ module.exports.list = async function (query) {
         }
     }
 
-    // filter the data by distance
     
+    normalizedArray.sort((a, b) => a.organization.localeCompare(b.organization))
     
     return normalizedArray
 }
